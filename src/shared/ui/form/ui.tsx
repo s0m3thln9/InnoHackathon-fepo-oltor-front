@@ -41,7 +41,7 @@ export const CommonForm = <T extends object>({
                 name={name}
                 placeholder={placeholder}
                 className={cn(
-                  'w-[420px] h-[56px] shadow-input-button placeholder-text-placeholder text-text-additional rounded-2xl px-4 outline-none max-2xl:h-12 max-2xl:w-96 max-sm:h-10 max-sm:w-80 max-sm:text-sm',
+                  'w-[420px] h-[56px] shadow-input-button placeholder-text-placeholder text-text-secondary rounded-2xl px-4 outline-none max-2xl:h-12 max-2xl:w-96 max-sm:h-10 max-sm:w-80 max-sm:text-sm',
                   touched[name as keyof T] && errors[name as keyof T]
                     ? 'border-error border'
                     : '',

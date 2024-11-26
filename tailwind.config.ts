@@ -17,13 +17,13 @@ export default {
     extend: {
       colors: {
         background: 'var(--background)',
-        'background-secondary': 'var(--background-secondary)',
-        'background-block': 'var(--background-block)',
-        'background-linear-first': 'var(--background-linear-first)',
-        'background-linear-second': 'var(--background-linear-second)',
+        'background-circles': 'var(--background-circles)',
+        'background-form': 'var(--background-form)',
+        'background-form-linear-first': 'var(--background-form-linear-first)',
+        'background-form-linear-second': 'var(--background-form-linear-second)',
         text: 'var(--text)',
         'text-link': 'var(--text-link)',
-        'text-additional': 'var(--text-additional)',
+        'text-secondary': 'var(--text-secondary)',
         'text-placeholder': 'var(--text-placeholder)',
         error: 'var(--error)',
       },
