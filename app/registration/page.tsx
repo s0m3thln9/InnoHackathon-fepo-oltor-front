@@ -1,3 +1,3 @@
-import { RegistrationPage } from '../../src/screens/registration'
+import { RegistrationPage } from '@/screens/registration'
 
 export default RegistrationPage
