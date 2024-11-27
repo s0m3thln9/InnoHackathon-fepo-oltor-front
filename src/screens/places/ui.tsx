@@ -41,13 +41,8 @@ export const PlacesPage = () => {
       headers: { 'Content-Type': 'application/json' },
     })
     const result = await response.json()
-    const arrayResult = []
-    for (const key in result) {
-      if (result.hasOwnProperty(key)) {
-        arrayResult.push(result[key])
-      }
-    }
-    return arrayResult
+    console.log(result)
+    return result.places
   }
 
   useEffect(() => {
