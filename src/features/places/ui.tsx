@@ -5,9 +5,15 @@ import { FC, useCallback, useRef, useState } from 'react'
 
 interface MapProps {
   markers?: {
-    title: string
-    lat: number
-    lng: number
+    coordinates: {
+      lat: number
+      lng: number
+    }
+    name: string
+    rating: number
+    period: string
+    description: string
+    image: string
   }[]
 }
 
@@ -38,7 +44,7 @@ export const Map: FC<MapProps> = ({ markers }) => {
     mapRef.current = map
   }, [])
 
-  const onUnmount = useCallback(function callback(map: google.maps.Map) {
+  const onUnmount = useCallback(function callback() {
     mapRef.current = undefined
   }, [])
 
@@ -56,19 +62,23 @@ export const Map: FC<MapProps> = ({ markers }) => {
           markers.map((marker, index) => (
             <Marker
               key={index}
-              position={{ lat: marker.lat, lng: marker.lng }}
+              position={{
+                lat: marker.coordinates.lat,
+                lng: marker.coordinates.lng,
+              }}
               onMouseOver={() => handleActiveMarker(index)}
               onMouseOut={() => handleActiveMarker(null)}
             >
               {activeMarker === index && (
                 <InfoWindow
-                  position={{ lat: marker.lat, lng: marker.lng }}
+                  position={{
+                    lat: marker.coordinates.lat,
+                    lng: marker.coordinates.lng,
+                  }}
                   options={{ headerDisabled: true }}
                 >
                   <div className='bg-white p-2 rounded-lg shadow-md'>
-                    <div className='font-bold text-gray-800'>
-                      {marker.title}
-                    </div>
+                    <div className='font-bold text-gray-800'>{marker.name}</div>
                     <div className='text-sm text-gray-600'>
                       Additional content can go here
                     </div>

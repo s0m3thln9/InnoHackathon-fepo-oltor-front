@@ -1,16 +1,16 @@
 'use client'
 
-import { useAppSelector } from '@/app/stores'
 import { FC } from 'react'
 import { useRouter } from 'next/navigation'
 import { cn } from '@/shared/libs'
+import Cookies from 'js-cookie'
 
 interface HeaderProps {
   selectedItem?: string
 }
 
 export const Header: FC<HeaderProps> = ({ selectedItem }) => {
-  const name = useAppSelector((state) => state.user.user?.name)
+  const name = JSON.parse(Cookies.get('user') as string).name
   const router = useRouter()
   function handleClick(event: string) {
     router.push(`/${event}`)

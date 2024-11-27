@@ -1,29 +1,58 @@
 'use client'
 
 import { Header } from '@/shared/ui/header'
-import { useAppSelector } from '@/app/stores'
+
 import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Map } from '@/features/places'
 import { Libraries, useJsApiLoader } from '@react-google-maps/api'
+import Cookies from 'js-cookie'
+
+interface MarkerState {
+  coordinates: {
+    lat: number
+    lng: number
+  }
+  name: string
+  rating: number
+  period: string
+  description: string
+  image: string
+}
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY
-
-const markers = [
-  { lat: 52.4355, lng: 30.9554, title: 'Marker 1' },
-  { lat: 52.4395, lng: 30.9954, title: 'Marker 2' },
-]
 
 const libs: Libraries = ['places']
 
 export const PlacesPage = () => {
-  // const user = useAppSelector((state) => state.user.user)
-  // const router = useRouter()
-  // useEffect(() => {
-  //   if (!user) {
-  //     router.replace('/login')
-  //   }
-  // }, [router, user])
+  const user = Cookies.get('user')
+  const router = useRouter()
+  const [markers, setMarkers] = useState<MarkerState[]>()
+
+  useEffect(() => {
+    if (!user) {
+      router.replace('/login')
+    }
+  }, [router, user])
+
+  const loadMarkers = async () => {
+    const response = await fetch('http://localhost:4000/places', {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    })
+    const result = await response.json()
+    const arrayResult = []
+    for (const key in result) {
+      if (result.hasOwnProperty(key)) {
+        arrayResult.push(result[key])
+      }
+    }
+    return arrayResult
+  }
+
+  useEffect(() => {
+    loadMarkers().then((r) => setMarkers(r))
+  }, [])
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',

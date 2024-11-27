@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import Cookies from 'js-cookie'
 
 export interface UserState {
   user: {
@@ -26,6 +27,7 @@ export const userSlice = createSlice({
       state.user = action.payload
       state.isAuth = true
       state.error = null
+      Cookies.set('user', JSON.stringify(action.payload), { expires: 7 })
     },
     loginFailure(state, action: PayloadAction<string>) {
       state.error = action.payload

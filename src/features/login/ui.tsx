@@ -7,8 +7,6 @@ import { useRouter } from 'next/navigation'
 import { Notification } from '@/shared/ui/notification'
 import { useAppDispatch, useAppSelector } from '@/app/stores'
 import { userSlice } from '@/entities/user'
-import Cookies from 'js-cookie'
-import { json } from 'node:stream/consumers'
 
 export interface LoginFormValues {
   email: string
@@ -61,16 +59,10 @@ export const LoginForm: FC = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(values),
     })
-    // const result: LoginResult = await response.json()
-    const result = {
-      status: true,
-      user: { email: 'email', name: 'name' },
-      message: '',
-    }
+    const result: LoginResult = await response.json()
     if (result.status) {
       if (result.user) {
         dispatch(userSlice.actions.loginSuccess(result.user))
-        Cookies.set('user', JSON.stringify(result.user), { expires: 7 })
       }
       router.replace('/')
     } else {
