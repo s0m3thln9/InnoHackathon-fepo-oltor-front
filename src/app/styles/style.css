@@ -6,11 +6,13 @@
 	:root {
 		--background: rgb(81, 45, 168);
 		--background-circles: rgb(66, 37, 146);
-		--background-form: rgb(166, 142, 232);
-		--background-form-linear-first: rgb(207, 189, 255);
-		--background-form-linear-second: rgb(249, 245, 255);
-		--background-main-linear-first: rgb(81, 45, 168);
-		--background-main-linear-second: rgb(241, 233, 255);
+		--background-secondary: rgb(166, 142, 232);
+		--background-primary-linear-first: rgb(207, 189, 255);
+		--background-primary-linear-second: rgb(249, 245, 255);
+		--background-secondary-linear-first: rgb(81, 45, 168);
+		--background-secondary-linear-second: rgb(241, 233, 255);
+		--background-button-linear-first: rgb(124, 77, 255);
+		--background-button-linear-second: rgb(74, 46, 153);
 		
 		--text: rgb(249, 245, 255);
 		--text-link: rgb(166, 142, 232);

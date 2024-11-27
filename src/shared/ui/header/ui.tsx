@@ -1,4 +1,7 @@
+import { useAppSelector } from '@/app/stores'
+
 export const Header = () => {
+  const name = useAppSelector((state) => state.user.user?.name)
   return (
     <header className='p-5 pl-10 flex items-center justify-between bg-background'>
       <div className='text-5xl text-text '>FePo</div>
@@ -10,7 +13,7 @@ export const Header = () => {
           <div>people</div>
         </nav>
         <div className='flex items-center gap-8'>
-          <div className='text-text'>name</div>
+          <div className='text-text'>{name}</div>
           <svg
             width='64'
             height='64'

@@ -18,11 +18,19 @@ export default {
       colors: {
         background: 'var(--background)',
         'background-circles': 'var(--background-circles)',
-        'background-form': 'var(--background-form)',
-        'background-form-linear-first': 'var(--background-form-linear-first)',
-        'background-form-linear-second': 'var(--background-form-linear-second)',
-        'background-main-linear-first': 'var(--background-main-linear-first)',
-        'background-main-linear-second': 'var(--background-main-linear-second)',
+        'background-secondary': 'var(--background-secondary)',
+        'background-primary-linear-first':
+          'var(--background-primary-linear-first)',
+        'background-primary-linear-second':
+          'var(--background-primary-linear-second)',
+        'background-secondary-linear-first':
+          'var(--background-secondary-linear-first)',
+        'background-secondary-linear-second':
+          'var(--background-secondary-linear-second)',
+        'background-button-linear-first':
+          'var(--background-button-linear-first)',
+        'background-button-linear-second':
+          'var(--background-button-linear-second)',
         text: 'var(--text)',
         'text-link': 'var(--text-link)',
         'text-secondary': 'var(--text-secondary)',
