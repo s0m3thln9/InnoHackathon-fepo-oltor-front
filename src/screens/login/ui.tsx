@@ -1,5 +1,6 @@
 import { LoginForm } from '@/features/login'
 import { FC } from 'react'
+import Link from 'next/link'
 
 export const LoginPage: FC = () => {
   return (
@@ -16,7 +17,7 @@ export const LoginPage: FC = () => {
           </div>
           <LoginForm />
           <div className='text-2xl text-text-link cursor-pointer hover:underline max-2xl:text-xl max-sm:text-lg'>
-            create account
+            <Link href={'/registration'}>create account</Link>
           </div>
         </div>
       </div>
