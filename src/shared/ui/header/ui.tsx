@@ -1,16 +1,62 @@
 import { useAppSelector } from '@/app/stores'
+import { FC } from 'react'
+import { useRouter } from 'next/navigation'
+import { cn } from '@/shared/libs'
 
-export const Header = () => {
+interface HeaderProps {
+  selectedItem?: string
+}
+
+export const Header: FC<HeaderProps> = ({ selectedItem }) => {
   const name = useAppSelector((state) => state.user.user?.name)
+  const router = useRouter()
+  function handleClick(event: string) {
+    router.push(`/${event}`)
+  }
+
   return (
     <header className='p-5 pl-10 flex items-center justify-between bg-background'>
-      <div className='text-5xl text-text '>FePo</div>
+      <div
+        className='text-5xl text-text cursor-pointer'
+        onClick={() => handleClick('')}
+      >
+        FePo
+      </div>
       <div className='flex items-center justify-between w-[50vw]'>
         <nav className='flex gap-16 text-text'>
-          <div>events</div>
-          <div>places</div>
-          <div>people</div>
-          <div>people</div>
+          <div
+            onClick={() => handleClick('events')}
+            className={cn(
+              'cursor-pointer',
+              selectedItem === 'events' ? 'font-medium underline' : '',
+            )}
+          >
+            events
+          </div>
+          <div
+            className={cn(
+              'cursor-pointer',
+              selectedItem === 'places' ? 'font-medium underline' : '',
+            )}
+          >
+            places
+          </div>
+          <div
+            className={cn(
+              'cursor-pointer',
+              selectedItem === 'people' ? 'font-medium underline' : '',
+            )}
+          >
+            people
+          </div>
+          <div
+            className={cn(
+              'cursor-pointer',
+              selectedItem === 'reviews' ? 'font-medium underline' : '',
+            )}
+          >
+            reviews
+          </div>
         </nav>
         <div className='flex items-center gap-8'>
           <div className='text-text'>{name}</div>

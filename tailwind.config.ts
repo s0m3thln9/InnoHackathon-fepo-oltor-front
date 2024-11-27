@@ -47,6 +47,10 @@ export default {
       dropShadow: {
         'slider-text': '0px 4px 4px rgba(0, 0, 0, 0.25)',
       },
+      backgroundImage: {
+        'gradient-button':
+          'linear-gradient(57deg, var(--background-button-linear-first) 0%, var(--background-button-linear-second) 100%)',
+      },
     },
   },
   plugins: [],

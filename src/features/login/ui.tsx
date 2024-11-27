@@ -59,15 +59,7 @@ export const LoginForm: FC = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(values),
     })
-    // const result: LoginResult = await response.json()
-    const result = {
-      status: true,
-      user: {
-        name: 'Daniil',
-        email: 'daniil2@gmail.com',
-      },
-      message: 'Success',
-    }
+    const result: LoginResult = await response.json()
     if (result.status) {
       if (result.user) dispatch(userSlice.actions.loginSuccess(result.user))
       router.replace('/')

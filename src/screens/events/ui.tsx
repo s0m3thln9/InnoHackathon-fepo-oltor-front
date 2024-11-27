@@ -31,7 +31,7 @@ export const EventsPage = () => {
   }, [router, user])
   return (
     <div className='h-[100svh] flex flex-col'>
-      <Header />
+      <Header selectedItem='events' />
       <main className='flex flex-col items-center justify-center bg-gradient-to-b from-background-secondary-linear-first to-background-secondary-linear-second'>
         <h1 className='text-[96px] text-text mt-8'>events</h1>
         <p className='text-2xl text-text-secondary mt-5'>
@@ -42,7 +42,7 @@ export const EventsPage = () => {
           className='mt-24'
         />
       </main>
-      <footer className='bg-background-main-linear-second h-full w-full'></footer>
+      <footer className='bg-background-secondary-linear-second h-full w-full'></footer>
     </div>
   )
 }
