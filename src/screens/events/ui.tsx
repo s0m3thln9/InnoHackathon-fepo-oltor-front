@@ -8,9 +8,9 @@ import image3 from '../../../public/images/corporativ_foto.png'
 import image4 from '../../../public/images/ch_foto.png'
 import image5 from '../../../public/images/bs_foto.png'
 import image6 from '../../../public/images/other_foto.png'
-import { useAppSelector } from '@/app/stores'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
+import Cookies from 'js-cookie'
 
 const slides: Slide[] = [
   { img: image1, text: 'wedding' },
@@ -22,7 +22,7 @@ const slides: Slide[] = [
 ]
 
 export const EventsPage = () => {
-  const user = useAppSelector((state) => state.user.user)
+  const user = Cookies.get('user')
   const router = useRouter()
   useEffect(() => {
     if (!user) {

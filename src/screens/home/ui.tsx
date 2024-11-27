@@ -9,9 +9,10 @@ import Image from 'next/image'
 import image1 from '../../../public/images/foto.png'
 import image2 from '../../../public/images/event.png'
 import image3 from '../../../public/images/glass.png'
+import Cookies from 'js-cookie'
 
 export const HomePage = () => {
-  const user = useAppSelector((state) => state.user.user)
+  const user = Cookies.get('user')
   const router = useRouter()
   useEffect(() => {
     if (!user) {

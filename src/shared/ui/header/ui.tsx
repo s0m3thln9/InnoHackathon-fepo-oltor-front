@@ -1,3 +1,5 @@
+'use client'
+
 import { useAppSelector } from '@/app/stores'
 import { FC } from 'react'
 import { useRouter } from 'next/navigation'
