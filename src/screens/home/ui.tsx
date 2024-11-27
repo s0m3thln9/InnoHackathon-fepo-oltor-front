@@ -1,8 +1,18 @@
 'use client'
 
 import { Header } from '@/shared/ui/header'
+import { useEffect } from 'react'
+import { useAppSelector } from '@/app/stores'
+import { useRouter } from 'next/navigation'
 
 export const HomePage = () => {
+  const user = useAppSelector((state) => state.user.user)
+  const router = useRouter()
+  useEffect(() => {
+    if (!user) {
+      router.replace('/login')
+    }
+  }, [router, user])
   return (
     <div className='h-[100svh] flex flex-col'>
       <Header />
