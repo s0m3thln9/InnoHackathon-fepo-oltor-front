@@ -35,6 +35,9 @@ export default {
         'registration-additional': '0px -6px 30px 0px rgba(44, 16, 110, 0.8)',
         'input-button': '0px 8px 30px 4px rgba(81, 45, 168, 0.2)',
       },
+      dropShadow: {
+        'slider-text': '0px 4px 4px rgba(0, 0, 0, 0.25)',
+      },
     },
   },
   plugins: [],
