@@ -20,7 +20,7 @@ export const HomePage = () => {
     }
   }, [router, user])
   return (
-    <div className='h-[100svh] flex flex-col'>
+    <>
       <Header />
       <main className='flex flex-col items-center justify-center bg-background-secondary pt-16 h-full'>
         <div className='w-full flex justify-start bg-background-primary-linear-first'>
@@ -69,6 +69,6 @@ export const HomePage = () => {
           </div>
         </div>
       </main>
-    </div>
+    </>
   )
 }
