@@ -21,6 +21,8 @@ export default {
         'background-form': 'var(--background-form)',
         'background-form-linear-first': 'var(--background-form-linear-first)',
         'background-form-linear-second': 'var(--background-form-linear-second)',
+        'background-main-linear-first': 'var(--background-main-linear-first)',
+        'background-main-linear-second': 'var(--background-main-linear-second)',
         text: 'var(--text)',
         'text-link': 'var(--text-link)',
         'text-secondary': 'var(--text-secondary)',
