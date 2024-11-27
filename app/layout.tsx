@@ -25,7 +25,7 @@ export default function App({
         lang='en'
         className={fredoka.className}
       >
-        <body className={''}>{children}</body>
+        <body className={'h-[100svh] flex flex-col'}>{children}</body>
       </html>
     </MainProviders>
   )

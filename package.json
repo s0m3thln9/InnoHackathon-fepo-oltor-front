@@ -9,14 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-google-maps/api": "^2.20.3",
     "@reduxjs/toolkit": "^2.3.0",
     "formik": "^2.4.6",
     "next": "15.0.3",
     "react": "19.0.0-rc-66855b96-20241106",
+    "react-cool-onclickoutside": "^1.7.0",
     "react-dom": "19.0.0-rc-66855b96-20241106",
     "react-id-swiper": "^4.0.0",
     "react-redux": "^9.1.2",
     "swiper": "^11.1.15",
+    "use-places-autocomplete": "^4.0.1",
     "yup": "^1.4.0"
   },
   "devDependencies": {

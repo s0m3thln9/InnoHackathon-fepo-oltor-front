@@ -34,6 +34,7 @@ export const Header: FC<HeaderProps> = ({ selectedItem }) => {
             events
           </div>
           <div
+            onClick={() => handleClick('places')}
             className={cn(
               'cursor-pointer',
               selectedItem === 'places' ? 'font-medium underline' : '',
@@ -42,6 +43,7 @@ export const Header: FC<HeaderProps> = ({ selectedItem }) => {
             places
           </div>
           <div
+            onClick={() => handleClick('people')}
             className={cn(
               'cursor-pointer',
               selectedItem === 'people' ? 'font-medium underline' : '',
@@ -50,6 +52,7 @@ export const Header: FC<HeaderProps> = ({ selectedItem }) => {
             people
           </div>
           <div
+            onClick={() => handleClick('reviews')}
             className={cn(
               'cursor-pointer',
               selectedItem === 'reviews' ? 'font-medium underline' : '',
