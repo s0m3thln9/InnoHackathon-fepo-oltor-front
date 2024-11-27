@@ -28,6 +28,7 @@ export default {
         'text-secondary': 'var(--text-secondary)',
         'text-placeholder': 'var(--text-placeholder)',
         error: 'var(--error)',
+        success: 'var(--success)',
       },
       boxShadow: {
         registration: '0px 0px 37px 10px rgba(44, 16, 110, 0.8)',

@@ -1,8 +1,10 @@
 'use client'
 
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import * as Yup from 'yup'
 import { CommonForm } from '@/shared/ui/form'
+import { useRouter } from 'next/navigation'
+import { Notification } from '@/shared/ui/notification'
 
 export interface RegistrationFormValues {
   name: string
@@ -47,23 +49,46 @@ const fields: Field[] = [
 ]
 
 export const RegistrationForm: FC = () => {
+  const router = useRouter()
+
+  const [notification, setNotification] = useState<{
+    message: string
+  } | null>(null)
+
+  const handleClose = () => {
+    setNotification(null)
+  }
+
   const handleSubmit = async (values: RegistrationFormValues) => {
-    const response = await fetch('http://localhost:80/registration', {
+    const response = await fetch('http://localhost:4000/registration', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(values),
     })
     const result = await response.json()
-    console.log(result)
+
+    if (result) {
+      router.replace('/login')
+    } else {
+      setNotification({ message: 'Something went wrong' })
+    }
   }
 
   return (
-    <CommonForm
-      initialValues={initialValues}
-      validationSchema={SignupSchema}
-      onSubmitAction={handleSubmit}
-      fields={fields}
-      buttonText='Create Account'
-    />
+    <>
+      <CommonForm
+        initialValues={initialValues}
+        validationSchema={SignupSchema}
+        onSubmitAction={handleSubmit}
+        fields={fields}
+        buttonText='Create Account'
+      />
+      {notification && (
+        <Notification
+          message={notification.message}
+          onClose={handleClose}
+        />
+      )}
+    </>
   )
 }
