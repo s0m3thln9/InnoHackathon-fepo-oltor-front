@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import { Notification } from '@/shared/ui/notification'
 import { useAppDispatch, useAppSelector } from '@/app/stores'
 import { userSlice } from '@/entities/user'
+import Cookies from 'js-cookie'
 
 export interface LoginFormValues {
   email: string
@@ -63,6 +64,7 @@ export const LoginForm: FC = () => {
     if (result.status) {
       if (result.user) {
         dispatch(userSlice.actions.loginSuccess(result.user))
+        Cookies.set('user', JSON.stringify(result.user), { expires: 7 })
       }
       router.replace('/')
     } else {
