@@ -5,6 +5,8 @@ import * as Yup from 'yup'
 import { CommonForm } from '@/shared/ui/form'
 import { useRouter } from 'next/navigation'
 import { Notification } from '@/shared/ui/notification'
+import { useAppDispatch, useAppSelector } from '@/app/stores'
+import { userSlice } from '@/entities/user'
 
 export interface RegistrationFormValues {
   name: string
@@ -17,6 +19,11 @@ export interface Field {
   name: string
   type: string
   placeholder: string
+}
+
+interface RegistrationResult {
+  status: boolean
+  message: string
 }
 
 const SignupSchema = Yup.object().shape({
@@ -50,13 +57,12 @@ const fields: Field[] = [
 
 export const RegistrationForm: FC = () => {
   const router = useRouter()
-
-  const [notification, setNotification] = useState<{
-    message: string
-  } | null>(null)
+  const dispatch = useAppDispatch()
+  const error = useAppSelector((state) => state.user.error)
+  const [notification, setNotification] = useState<boolean>(false)
 
   const handleClose = () => {
-    setNotification(null)
+    setNotification(false)
   }
 
   const handleSubmit = async (values: RegistrationFormValues) => {
@@ -65,12 +71,12 @@ export const RegistrationForm: FC = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(values),
     })
-    const result = await response.json()
-
-    if (result) {
+    const result: RegistrationResult = await response.json()
+    if (result.status) {
       router.replace('/login')
     } else {
-      setNotification({ message: 'Something went wrong' })
+      dispatch(userSlice.actions.registerFailure(result.message))
+      setNotification(true)
     }
   }
 
@@ -83,9 +89,9 @@ export const RegistrationForm: FC = () => {
         fields={fields}
         buttonText='Create Account'
       />
-      {notification && (
+      {notification && error && (
         <Notification
-          message={notification.message}
+          message={error}
           onClose={handleClose}
         />
       )}

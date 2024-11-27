@@ -5,6 +5,8 @@ import * as Yup from 'yup'
 import { CommonForm } from '@/shared/ui/form'
 import { useRouter } from 'next/navigation'
 import { Notification } from '@/shared/ui/notification'
+import { useAppDispatch, useAppSelector } from '@/app/stores'
+import { userSlice } from '@/entities/user'
 
 export interface LoginFormValues {
   email: string
@@ -15,6 +17,15 @@ export interface Field {
   name: string
   type: string
   placeholder: string
+}
+
+interface LoginResult {
+  status: boolean
+  user: {
+    email: string
+    name: string
+  } | null
+  message: string
 }
 
 const SignupSchema = Yup.object().shape({
@@ -34,13 +45,12 @@ const fields: Field[] = [
 
 export const LoginForm: FC = () => {
   const router = useRouter()
-
-  const [notification, setNotification] = useState<{
-    message: string
-  } | null>(null)
+  const dispatch = useAppDispatch()
+  const error = useAppSelector((state) => state.user.error)
+  const [notification, setNotification] = useState<boolean>(false)
 
   const handleClose = () => {
-    setNotification(null)
+    setNotification(false)
   }
 
   const handleSubmit = async (values: LoginFormValues) => {
@@ -49,13 +59,13 @@ export const LoginForm: FC = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(values),
     })
-    const result = await response.json()
-    result.message = 'Incorrect email or password'
-    console.log(result)
+    const result: LoginResult = await response.json()
     if (result.status) {
+      result.user && dispatch(userSlice.actions.loginSuccess(result.user))
       router.replace('/')
     } else {
-      setNotification({ message: result.message })
+      dispatch(userSlice.actions.loginFailure(result.message))
+      setNotification(true)
     }
   }
 
@@ -68,9 +78,9 @@ export const LoginForm: FC = () => {
         fields={fields}
         buttonText='Log In to Account'
       />
-      {notification && (
+      {notification && error && (
         <Notification
-          message={notification.message}
+          message={error}
           onClose={handleClose}
         />
       )}

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import '@/app/styles/style.css'
 import { Fredoka } from 'next/font/google'
 import { ReactNode } from 'react'
+import { MainProviders } from '@/app/providers'
 
 const fredoka = Fredoka({
   subsets: ['latin'],
@@ -19,11 +20,13 @@ export default function App({
   children: ReactNode
 }>) {
   return (
-    <html
-      lang='en'
-      className={fredoka.className}
-    >
-      <body className={''}>{children}</body>
-    </html>
+    <MainProviders>
+      <html
+        lang='en'
+        className={fredoka.className}
+      >
+        <body className={''}>{children}</body>
+      </html>
+    </MainProviders>
   )
 }
