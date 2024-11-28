@@ -15,9 +15,14 @@ export interface Slide {
 interface SliderProps {
   className?: string
   slides: Slide[]
+  handleClickAction: (text: string) => void
 }
 
-export const Slider: FC<SliderProps> = ({ className, slides }) => {
+export const Slider: FC<SliderProps> = ({
+  className,
+  slides,
+  handleClickAction,
+}) => {
   const [slidesCount, setSlidesCount] = useState(4)
 
   useEffect(() => {
@@ -58,7 +63,10 @@ export const Slider: FC<SliderProps> = ({ className, slides }) => {
       className={cn('w-full select-none', className)}
     >
       {slides.map((slide) => (
-        <SwiperSlide key={slide.text}>
+        <SwiperSlide
+          key={slide.text}
+          onClick={() => handleClickAction(slide.text)}
+        >
           <div className='relative flex justify-center items-center'>
             <div className='bg-background w-fit rounded-[20px]'>
               <Image

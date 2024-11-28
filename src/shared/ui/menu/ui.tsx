@@ -51,42 +51,18 @@ export const Menu: FC<MenuProps> = ({ selectedItem }) => {
   if (!isMobile) {
     return (
       <nav className='flex gap-16 text-text max-lg:gap-6'>
-        <div
-          onClick={() => handleClick('events')}
-          className={cn(
-            'cursor-pointer',
-            selectedItem === 'events' ? 'font-medium underline' : '',
-          )}
-        >
-          events
-        </div>
-        <div
-          onClick={() => handleClick('places')}
-          className={cn(
-            'cursor-pointer',
-            selectedItem === 'places' ? 'font-medium underline' : '',
-          )}
-        >
-          places
-        </div>
-        <div
-          onClick={() => handleClick('people')}
-          className={cn(
-            'cursor-pointer',
-            selectedItem === 'people' ? 'font-medium underline' : '',
-          )}
-        >
-          people
-        </div>
-        <div
-          onClick={() => handleClick('reviews')}
-          className={cn(
-            'cursor-pointer',
-            selectedItem === 'reviews' ? 'font-medium underline' : '',
-          )}
-        >
-          reviews
-        </div>
+        {['events', 'places', 'people', 'total'].map((item) => (
+          <div
+            key={item}
+            onClick={() => handleClick(item)}
+            className={cn(
+              'cursor-pointer',
+              selectedItem === item ? 'font-medium underline' : '',
+            )}
+          >
+            {item}
+          </div>
+        ))}
       </nav>
     )
   } else {

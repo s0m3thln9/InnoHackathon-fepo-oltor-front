@@ -9,18 +9,27 @@ import image4 from '../../../public/images/ch_foto.png'
 import image5 from '../../../public/images/bs_foto.png'
 import image6 from '../../../public/images/other_foto.png'
 import { useLoadUser } from '@/shared/hooks'
+import { useRouter } from 'next/navigation'
 
 const slides: Slide[] = [
   { img: image1, text: 'wedding' },
   { img: image2, text: 'birthday' },
   { img: image3, text: 'corporate party' },
-  { img: image4, text: "children's party" },
+  { img: image4, text: 'children`s party' },
   { img: image5, text: 'business meeting' },
   { img: image6, text: 'other event' },
 ]
 
 export const EventsPage = () => {
+  const router = useRouter()
   const { user, isUserLoaded } = useLoadUser()
+
+  const handleClickAction = (text: string) => {
+    if (sessionStorage.getItem('category') !== text) {
+      sessionStorage.setItem('category', text)
+    }
+    router.push('/places')
+  }
 
   if (!isUserLoaded && !user) {
     return (
@@ -41,6 +50,7 @@ export const EventsPage = () => {
           First, select the upcoming event
         </p>
         <Slider
+          handleClickAction={handleClickAction}
           slides={slides}
           className='mt-24 max-lg:mt-8'
         />

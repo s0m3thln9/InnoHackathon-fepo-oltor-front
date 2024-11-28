@@ -52,6 +52,7 @@ export const Map: FC<MapProps> = ({ markers }) => {
   const date = useAppSelector((state) => state.filter.date)
   const time = useAppSelector((state) => state.filter.time)
   const numberOfPeople = useAppSelector((state) => state.filter.numberOfPeople)
+  const category = sessionStorage.getItem('category')
   const [isLike, setIsLike] = useState(false)
   const router = useRouter()
 
@@ -89,6 +90,8 @@ export const Map: FC<MapProps> = ({ markers }) => {
 
   useEffect(() => {
     const filtered = markers?.filter((marker) => {
+      const categoryMatch =
+        category === undefined || marker.categories.includes(category as string)
       const dateMatch = date === undefined || marker.dates.includes(date)
       const [startTime, endTime] = marker.period.split('-')
       const timeMatch =
@@ -96,12 +99,12 @@ export const Map: FC<MapProps> = ({ markers }) => {
       const peopleMatch =
         numberOfPeople === undefined || marker.maxPeople >= numberOfPeople
 
-      return dateMatch && timeMatch && peopleMatch
+      return categoryMatch && dateMatch && timeMatch && peopleMatch
     })
 
     setFilteredMarkers(filtered)
     console.log(filtered)
-  }, [date, markers, numberOfPeople, time])
+  }, [category, date, markers, numberOfPeople, time])
 
   return (
     <div className='w-full h-full relative'>
