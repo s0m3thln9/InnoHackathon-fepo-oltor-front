@@ -93,7 +93,7 @@ export const Menu: FC<MenuProps> = ({ selectedItem }) => {
     return (
       <div className='relative'>
         <div
-          className='text-text cursor-pointer'
+          className='text-text cursor-pointer select-none'
           onClick={openMenu}
         >
           Links
