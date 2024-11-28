@@ -34,13 +34,15 @@ export const EventsPage = () => {
     <>
       <Header selectedItem='events' />
       <main className='flex flex-col items-center justify-center bg-gradient-to-b from-background-secondary-linear-first to-background-secondary-linear-second'>
-        <h1 className='text-8xl text-text mt-8'>events</h1>
-        <p className='text-2xl text-text-secondary mt-5'>
+        <h1 className='text-8xl text-text mt-8 max-2xl:text-7xl max-sm:text-6xl'>
+          events
+        </h1>
+        <p className='text-2xl text-text-secondary mt-5 max-2xl:text-xl max-sm:text-lgl'>
           First, select the upcoming event
         </p>
         <Slider
           slides={slides}
-          className='mt-24'
+          className='mt-24 max-lg:mt-8'
         />
       </main>
       <footer className='bg-background-secondary-linear-second h-full w-full'></footer>

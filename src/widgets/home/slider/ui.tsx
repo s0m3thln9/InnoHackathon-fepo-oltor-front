@@ -1,6 +1,6 @@
 'use client'
 
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/free-mode'
@@ -18,9 +18,42 @@ interface SliderProps {
 }
 
 export const Slider: FC<SliderProps> = ({ className, slides }) => {
+  const [slidesCount, setSlidesCount] = useState(4)
+
+  useEffect(() => {
+    setSlidesCount(() => {
+      if (window.innerWidth > 1150) {
+        return 4
+      } else if (window.innerWidth > 800) {
+        return 3
+      } else if (window.innerWidth > 520) {
+        return 2
+      } else {
+        return 1
+      }
+    })
+    const handleResize = () => {
+      setSlidesCount(() => {
+        if (window.innerWidth > 1150) {
+          return 4
+        } else if (window.innerWidth > 800) {
+          return 3
+        } else if (window.innerWidth > 520) {
+          return 2
+        } else {
+          return 1
+        }
+      })
+    }
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
   return (
     <Swiper
-      slidesPerView={4}
+      slidesPerView={slidesCount}
       freeMode={true}
       className={cn('w-full select-none', className)}
     >
