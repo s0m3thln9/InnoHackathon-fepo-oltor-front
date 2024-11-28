@@ -3,13 +3,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 export interface FilterState {
   date?: string
   time?: string
-  numberOfPeople?: number
+  numberOfPeople: number
 }
 
 export const initialState: FilterState = {
   date: undefined,
   time: undefined,
-  numberOfPeople: undefined,
+  numberOfPeople: 0,
 }
 
 export const filterSlice = createSlice({

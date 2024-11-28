@@ -1,9 +1,10 @@
 'use client'
 
 import { GoogleMap, InfoWindow, Marker } from '@react-google-maps/api'
-import { FC, useCallback, useRef, useState } from 'react'
+import { FC, useCallback, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { Filters } from '@/shared/ui/filters/ui'
+import { useAppSelector } from '@/app/stores'
 
 interface MapProps {
   markers?: {
@@ -12,12 +13,13 @@ interface MapProps {
       lng: number
     }
     categories: string[]
-    dates: Date[]
+    dates: string[]
     name: string
     rating: number
     period: string
     description: string
     image: Blob
+    maxPeople: number
   }[]
 }
 
@@ -35,7 +37,11 @@ const mapOptions = {
 
 export const Map: FC<MapProps> = ({ markers }) => {
   const [activeMarker, setActiveMarker] = useState<null | number>(null)
+  const [filteredMarkers, setFilteredMarkers] = useState(markers)
   const mapRef = useRef<google.maps.Map | undefined>(undefined)
+  const date = useAppSelector((state) => state.filter.date)
+  const time = useAppSelector((state) => state.filter.time)
+  const numberOfPeople = useAppSelector((state) => state.filter.numberOfPeople)
 
   const handleActiveMarker = (markerIndex: number | null) => {
     if (markerIndex === activeMarker) {
@@ -59,6 +65,22 @@ export const Map: FC<MapProps> = ({ markers }) => {
     }
   }, [activeMarker])
 
+  useEffect(() => {
+    const filtered = markers?.filter((marker) => {
+      const dateMatch = date === undefined || marker.dates.includes(date)
+      const [startTime, endTime] = marker.period.split('-')
+      const timeMatch =
+        time === undefined || (time >= startTime && time <= endTime)
+      const peopleMatch =
+        numberOfPeople === undefined || marker.maxPeople >= numberOfPeople
+
+      return dateMatch && timeMatch && peopleMatch
+    })
+
+    setFilteredMarkers(filtered)
+    console.log(filtered)
+  }, [date, markers, numberOfPeople, time])
+
   return (
     <div className='w-full h-full relative'>
       <Filters />
@@ -70,8 +92,8 @@ export const Map: FC<MapProps> = ({ markers }) => {
         onLoad={onLoad}
         onUnmount={onUnmount}
       >
-        {markers &&
-          markers.map((marker, index) => (
+        {filteredMarkers &&
+          filteredMarkers.map((marker, index) => (
             <Marker
               key={index}
               position={{

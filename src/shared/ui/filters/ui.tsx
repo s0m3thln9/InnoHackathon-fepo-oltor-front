@@ -6,24 +6,27 @@ import { useAppDispatch } from '@/app/stores'
 import { filterSlice } from '@/entities/filter'
 
 export const Filters = () => {
-  const [date, setDate] = useState('')
-  const [time, setTime] = useState('')
-  const [numberOfPeople, setNumberOfPeople] = useState(0)
+  const [dateFilter, setDateFilter] = useState<string | undefined>('')
+  const [timeFilter, setTimeFilter] = useState<string | undefined>('')
+  const [numberOfPeopleFilter, setNumberOfPeopleFilter] = useState(0)
   const dispatch = useAppDispatch()
 
   const onChangePeople = (event: ChangeEvent<HTMLInputElement>) => {
-    setNumberOfPeople(+event.target.value)
+    setNumberOfPeopleFilter(+event.target.value)
   }
 
   const onChangeDate = (event: ChangeEvent<HTMLInputElement>) => {
-    setDate(event.target.value)
+    setDateFilter(event.target.value)
   }
 
   const onChangeTime = (event: ChangeEvent<HTMLInputElement>) => {
-    setTime(event.target.value)
+    setTimeFilter(event.target.value)
   }
 
   const onSubmit = () => {
+    const date = dateFilter ? dateFilter : undefined
+    const time = timeFilter ? timeFilter : undefined
+    const numberOfPeople = numberOfPeopleFilter
     dispatch(
       filterSlice.actions.setFilter({
         date,
@@ -60,14 +63,14 @@ export const Filters = () => {
           label='select date'
           name='date'
           type='date'
-          value={date}
+          value={dateFilter}
           onChange={onChangeDate}
         />
         <Input
           label='select time'
           name='time'
           type='time'
-          value={time}
+          value={timeFilter}
           onChange={onChangeTime}
         />
         <Input
@@ -75,11 +78,11 @@ export const Filters = () => {
           name='people'
           type='number'
           className='w-12'
-          value={numberOfPeople}
+          value={numberOfPeopleFilter}
           onChange={onChangePeople}
         />
         <Toddler
-          value={numberOfPeople}
+          value={numberOfPeopleFilter}
           onChange={onChangePeople}
         />
         <Button

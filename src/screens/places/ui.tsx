@@ -12,12 +12,13 @@ interface MarkerState {
     lng: number
   }
   categories: string[]
-  dates: Date[]
+  dates: string[]
   name: string
   rating: number
   period: string
   description: string
   image: Blob
+  maxPeople: number
 }
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY
@@ -29,12 +30,44 @@ export const PlacesPage = () => {
   const { user, isUserLoaded } = useLoadUser()
 
   const loadMarkers = async () => {
-    const response = await fetch('http://localhost:4000/places', {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-    })
-    const result = await response.json()
-    console.log(result)
+    // const response = await fetch('http://localhost:4000/places', {
+    //   method: 'GET',
+    //   headers: { 'Content-Type': 'application/json' },
+    // })
+    // const result = await response.json()
+    const result = {
+      places: [
+        {
+          coordinates: {
+            lat: 52.4369,
+            lng: 30.9578,
+          },
+          name: 'first',
+          categories: ['first', 'second'],
+          dates: ['2024-11-29', '2024-11-30'],
+          rating: 4,
+          period: '11:00-21:00',
+          description: 'first description',
+          image: new Blob(),
+          maxPeople: 40,
+        },
+        {
+          coordinates: {
+            lat: 52.4399,
+            lng: 30.9599,
+          },
+          name: 'second',
+          categories: ['first', 'second'],
+          dates: ['2024-11-30', '2024-12-01'],
+          rating: 3,
+          period: '08:00-22:00',
+          description: 'second description',
+          image: new Blob(),
+          maxPeople: 20,
+        },
+      ],
+    }
+
     return result.places
   }
 
