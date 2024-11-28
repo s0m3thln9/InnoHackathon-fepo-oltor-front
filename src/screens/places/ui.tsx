@@ -15,7 +15,7 @@ interface MarkerState {
   rating: number
   period: string
   description: string
-  image: string
+  image: Blob
 }
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY

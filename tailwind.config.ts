@@ -43,6 +43,7 @@ export default {
         'registration-sm': '0px 0px 17px 5px rgba(44, 16, 110, 0.6)',
         'registration-additional': '0px -6px 30px 0px rgba(44, 16, 110, 0.8)',
         'input-button': '0px 8px 30px 4px rgba(81, 45, 168, 0.2)',
+        'map-item': '0px 0px 10px 0px rgba(39, 37, 147, 1)',
       },
       dropShadow: {
         'slider-text': '0px 4px 4px rgba(0, 0, 0, 0.25)',
