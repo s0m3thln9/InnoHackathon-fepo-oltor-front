@@ -4,16 +4,28 @@ import { FC } from 'react'
 import { useRouter } from 'next/navigation'
 import { cn } from '@/shared/libs'
 import Cookies from 'js-cookie'
+import { useAppDispatch } from '@/app/stores'
+import { userSlice } from '@/entities/user'
 
 interface HeaderProps {
   selectedItem?: string
 }
 
 export const Header: FC<HeaderProps> = ({ selectedItem }) => {
-  const name = JSON.parse(Cookies.get('user') as string).name
+  const name =
+    Cookies.get('user') !== undefined
+      ? JSON.parse(Cookies.get('user') as string).name
+      : ''
   const router = useRouter()
-  function handleClick(event: string) {
+  const dispatch = useAppDispatch()
+
+  const handleClick = (event: string) => {
     router.push(`/${event}`)
+  }
+
+  const logout = () => {
+    Cookies.remove('user')
+    dispatch(userSlice.actions.logout())
   }
 
   return (
@@ -64,7 +76,12 @@ export const Header: FC<HeaderProps> = ({ selectedItem }) => {
           </div>
         </nav>
         <div className='flex items-center gap-8'>
-          <div className='text-text'>{name}</div>
+          <div
+            className='text-text'
+            onClick={logout}
+          >
+            {name}
+          </div>
           <svg
             width='64'
             height='64'

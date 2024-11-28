@@ -5,13 +5,11 @@ export interface UserState {
     name: string
     email: string
   } | null
-  isAuth: boolean
   error: string | null
 }
 
 export const initialState: UserState = {
   user: null,
-  isAuth: false,
   error: null,
 }
 
@@ -24,7 +22,6 @@ export const userSlice = createSlice({
       action: PayloadAction<{ name: string; email: string }>,
     ) {
       state.user = action.payload
-      state.isAuth = true
       state.error = null
     },
     loginFailure(state, action: PayloadAction<string>) {
@@ -32,6 +29,12 @@ export const userSlice = createSlice({
     },
     registerFailure(state, action: PayloadAction<string>) {
       state.error = action.payload
+    },
+    loadUser(state, action: PayloadAction<{ name: string; email: string }>) {
+      state.user = action.payload
+    },
+    logout(state) {
+      state.user = null
     },
   },
 })

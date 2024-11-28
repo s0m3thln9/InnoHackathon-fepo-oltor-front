@@ -1,24 +1,23 @@
 'use client'
 
 import { Header } from '@/shared/ui/header'
-import { useEffect } from 'react'
-import { useAppSelector } from '@/app/stores'
-import { useRouter } from 'next/navigation'
 import { Button } from '@/shared/ui/button'
 import Image from 'next/image'
 import image1 from '../../../public/images/foto.png'
 import image2 from '../../../public/images/event.png'
 import image3 from '../../../public/images/glass.png'
-import Cookies from 'js-cookie'
+import { useLoadUser } from '@/shared/hooks'
 
 export const HomePage = () => {
-  const user = Cookies.get('user')
-  const router = useRouter()
-  useEffect(() => {
-    if (!user) {
-      router.replace('/login')
-    }
-  }, [router, user])
+  const { user, isUserLoaded } = useLoadUser()
+
+  if (!isUserLoaded && !user) {
+    return (
+      <div className='w-full h-full flex justify-center items-center'>
+        Loading...
+      </div>
+    )
+  }
   return (
     <>
       <Header />

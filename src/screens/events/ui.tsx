@@ -8,9 +8,7 @@ import image3 from '../../../public/images/corporativ_foto.png'
 import image4 from '../../../public/images/ch_foto.png'
 import image5 from '../../../public/images/bs_foto.png'
 import image6 from '../../../public/images/other_foto.png'
-import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
-import Cookies from 'js-cookie'
+import { useLoadUser } from '@/shared/hooks'
 
 const slides: Slide[] = [
   { img: image1, text: 'wedding' },
@@ -22,13 +20,16 @@ const slides: Slide[] = [
 ]
 
 export const EventsPage = () => {
-  const user = Cookies.get('user')
-  const router = useRouter()
-  useEffect(() => {
-    if (!user) {
-      router.replace('/login')
-    }
-  }, [router, user])
+  const { user, isUserLoaded } = useLoadUser()
+
+  if (!isUserLoaded && !user) {
+    return (
+      <div className='w-full h-full flex justify-center items-center'>
+        Loading...
+      </div>
+    )
+  }
+
   return (
     <>
       <Header selectedItem='events' />

@@ -63,8 +63,9 @@ export const LoginForm: FC = () => {
     const result: LoginResult = await response.json()
     if (result.status) {
       if (result.user) {
-        dispatch(userSlice.actions.loginSuccess(result.user))
         Cookies.set('user', JSON.stringify(result.user), { expires: 7 })
+        const user = JSON.parse(Cookies.get('user') as string)
+        dispatch(userSlice.actions.loginSuccess(user))
       }
       router.replace('/')
     } else {
