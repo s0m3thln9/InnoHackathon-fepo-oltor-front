@@ -3,9 +3,15 @@
 import { Header } from '@/shared/ui/header'
 import { Button } from '@/shared/ui/button'
 import { useLoadUser } from '@/shared/hooks'
+import { useRouter } from 'next/navigation'
 
 export const HomePage = () => {
+  const router = useRouter()
   const { user, isUserLoaded } = useLoadUser()
+
+  const handleClick = () => {
+    router.push('/events')
+  }
 
   if (!isUserLoaded && !user) {
     return (
@@ -14,6 +20,7 @@ export const HomePage = () => {
       </div>
     )
   }
+
   return (
     <>
       <Header />
@@ -66,7 +73,10 @@ export const HomePage = () => {
                 qualified professionals for your perfect event.
               </div>
             </div>
-            <Button className='py-5 px-16 text-4xl mt-24 max-2xl:mt-20 max-2xl:text-3xl max-sm:text-2xl'>
+            <Button
+              onClick={handleClick}
+              className='py-5 px-16 text-4xl mt-24 max-2xl:mt-20 max-2xl:text-3xl max-sm:text-2xl'
+            >
               click to start
             </Button>
           </div>
