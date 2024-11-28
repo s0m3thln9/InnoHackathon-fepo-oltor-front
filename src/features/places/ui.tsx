@@ -150,6 +150,9 @@ export const Map: FC<MapProps> = ({ markers }) => {
                     <div className='text-[14px] text-text-secondary pl-2 leading-4 text-wrap'>
                       {marker.description}
                     </div>
+                    <div className='text-[14px] text-text-secondary pl-2'>
+                      {marker.period}
+                    </div>
                     <div className='flex items-center gap-12 p-2'>
                       <div className='flex gap-1'>
                         {Array.from({ length: 5 }, (_, index) => {
