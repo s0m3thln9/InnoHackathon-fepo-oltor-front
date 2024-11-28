@@ -147,10 +147,10 @@ export const Map: FC<MapProps> = ({ markers }) => {
                       className='absolute top-0 left-0 w-56 h-[70px] object-cover'
                     />
                     <div className='text-2xl text-text pl-2'>{marker.name}</div>
-                    <div className='text-[14px] text-text-secondary pl-2 leading-4 text-wrap'>
+                    <div className='text-sm text-text-secondary pl-2 leading-4 text-wrap'>
                       {marker.description}
                     </div>
-                    <div className='text-[14px] text-text-secondary pl-2'>
+                    <div className='text-sm text-text-secondary pl-2'>
                       {marker.period}
                     </div>
                     <div className='flex items-center gap-12 p-2'>
