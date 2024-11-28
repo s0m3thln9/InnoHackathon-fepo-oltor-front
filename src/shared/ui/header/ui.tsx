@@ -2,10 +2,10 @@
 
 import { FC } from 'react'
 import { useRouter } from 'next/navigation'
-import { cn } from '@/shared/libs'
 import Cookies from 'js-cookie'
 import { useAppDispatch } from '@/app/stores'
 import { userSlice } from '@/entities/user'
+import { Menu } from '@/shared/ui/menu'
 
 interface HeaderProps {
   selectedItem?: string
@@ -29,53 +29,16 @@ export const Header: FC<HeaderProps> = ({ selectedItem }) => {
   }
 
   return (
-    <header className='p-5 pl-10 flex items-center justify-between bg-background'>
+    <header className='p-5 pl-10 flex items-center justify-between bg-background max-sm:p-3'>
       <div
         className='text-5xl text-text cursor-pointer'
         onClick={() => handleClick('')}
       >
         FePo
       </div>
-      <div className='flex items-center justify-between w-[50vw]'>
-        <nav className='flex gap-16 text-text'>
-          <div
-            onClick={() => handleClick('events')}
-            className={cn(
-              'cursor-pointer',
-              selectedItem === 'events' ? 'font-medium underline' : '',
-            )}
-          >
-            events
-          </div>
-          <div
-            onClick={() => handleClick('places')}
-            className={cn(
-              'cursor-pointer',
-              selectedItem === 'places' ? 'font-medium underline' : '',
-            )}
-          >
-            places
-          </div>
-          <div
-            onClick={() => handleClick('people')}
-            className={cn(
-              'cursor-pointer',
-              selectedItem === 'people' ? 'font-medium underline' : '',
-            )}
-          >
-            people
-          </div>
-          <div
-            onClick={() => handleClick('reviews')}
-            className={cn(
-              'cursor-pointer',
-              selectedItem === 'reviews' ? 'font-medium underline' : '',
-            )}
-          >
-            reviews
-          </div>
-        </nav>
-        <div className='flex items-center gap-8'>
+      <div className='flex items-center justify-between w-[50vw] max-xl:w-auto max-xl:gap-8 max-sm:gap-4'>
+        <Menu selectedItem={selectedItem} />
+        <div className='flex items-center gap-8 max-sm:gap-4'>
           <div
             className='text-text'
             onClick={logout}
@@ -83,6 +46,7 @@ export const Header: FC<HeaderProps> = ({ selectedItem }) => {
             {name}
           </div>
           <svg
+            className='max-sm:size-12'
             width='64'
             height='64'
             viewBox='0 0 64 64'

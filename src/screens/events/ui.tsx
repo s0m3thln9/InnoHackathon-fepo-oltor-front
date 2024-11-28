@@ -34,7 +34,7 @@ export const EventsPage = () => {
     <>
       <Header selectedItem='events' />
       <main className='flex flex-col items-center justify-center bg-gradient-to-b from-background-secondary-linear-first to-background-secondary-linear-second'>
-        <h1 className='text-[96px] text-text mt-8'>events</h1>
+        <h1 className='text-8xl text-text mt-8'>events</h1>
         <p className='text-2xl text-text-secondary mt-5'>
           First, select the upcoming event
         </p>
