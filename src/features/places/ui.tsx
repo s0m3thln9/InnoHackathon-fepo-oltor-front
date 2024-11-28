@@ -1,21 +1,36 @@
 'use client'
 
 import { GoogleMap, InfoWindow, Marker } from '@react-google-maps/api'
-import { FC, useState } from 'react'
+import {
+  FC,
+  MouseEventHandler,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 import Image from 'next/image'
+import { Filters } from '@/shared/ui/filters/ui'
+import { useAppSelector } from '@/app/stores'
+import { useRouter } from 'next/navigation'
+
+interface CustomMarker {
+  coordinates: {
+    lat: number
+    lng: number
+  }
+  categories: string[]
+  dates: string[]
+  name: string
+  rating: number
+  period: string
+  description: string
+  image: Blob
+  maxPeople: number
+}
 
 interface MapProps {
-  markers?: {
-    coordinates: {
-      lat: number
-      lng: number
-    }
-    name: string
-    rating: number
-    period: string
-    description: string
-    image: Blob
-  }[]
+  markers?: CustomMarker[]
 }
 
 const mapOptions = {
@@ -32,6 +47,14 @@ const mapOptions = {
 
 export const Map: FC<MapProps> = ({ markers }) => {
   const [activeMarker, setActiveMarker] = useState<null | number>(null)
+  const [filteredMarkers, setFilteredMarkers] = useState(markers)
+  const mapRef = useRef<google.maps.Map | undefined>(undefined)
+  const date = useAppSelector((state) => state.filter.date)
+  const time = useAppSelector((state) => state.filter.time)
+  const numberOfPeople = useAppSelector((state) => state.filter.numberOfPeople)
+  const [isLike, setIsLike] = useState(false)
+  const router = useRouter()
+
   const handleActiveMarker = (markerIndex: number | null) => {
     if (markerIndex === activeMarker) {
       return
@@ -39,16 +62,60 @@ export const Map: FC<MapProps> = ({ markers }) => {
     setActiveMarker(markerIndex)
   }
 
+  const onLoad = useCallback(function callback(map: google.maps.Map) {
+    mapRef.current = map
+    mapRef.current?.setCenter({ lat: 52.4355, lng: 30.9554 })
+  }, [])
+
+  const onUnmount = useCallback(function callback() {
+    mapRef.current = undefined
+  }, [])
+
+  const handleMapClick = useCallback(() => {
+    if (activeMarker !== null) {
+      setActiveMarker(null)
+    }
+  }, [activeMarker])
+
+  const handleCardClick = (marker: CustomMarker) => {
+    sessionStorage.setItem('place', JSON.stringify(marker))
+    router.push('/people')
+  }
+
+  const handleLikeClick: MouseEventHandler<HTMLDivElement> = (event) => {
+    event.stopPropagation()
+    setIsLike(!isLike)
+  }
+
+  useEffect(() => {
+    const filtered = markers?.filter((marker) => {
+      const dateMatch = date === undefined || marker.dates.includes(date)
+      const [startTime, endTime] = marker.period.split('-')
+      const timeMatch =
+        time === undefined || (time >= startTime && time <= endTime)
+      const peopleMatch =
+        numberOfPeople === undefined || marker.maxPeople >= numberOfPeople
+
+      return dateMatch && timeMatch && peopleMatch
+    })
+
+    setFilteredMarkers(filtered)
+    console.log(filtered)
+  }, [date, markers, numberOfPeople, time])
+
   return (
-    <div className='w-full h-full'>
+    <div className='w-full h-full relative'>
+      <Filters />
       <GoogleMap
-        center={{ lat: 52.4355, lng: 30.9554 }}
         zoom={13}
         mapContainerClassName='w-full h-full'
         options={mapOptions}
+        onClick={handleMapClick}
+        onLoad={onLoad}
+        onUnmount={onUnmount}
       >
-        {markers &&
-          markers.map((marker, index) => (
+        {filteredMarkers &&
+          filteredMarkers.map((marker, index) => (
             <Marker
               key={index}
               position={{
@@ -62,9 +129,13 @@ export const Map: FC<MapProps> = ({ markers }) => {
                   options={{
                     headerDisabled: true,
                     pixelOffset: new window.google.maps.Size(120, 10),
+                    disableAutoPan: true,
                   }}
                 >
-                  <div className='shadow-map-item relative bg-white rounded-3xl rounded-bl-none bg-gradient-to-b from-background to-background-secondary-linear-second w-56 pt-[70px] overflow-hidden'>
+                  <div
+                    onClick={() => handleCardClick(marker)}
+                    className='cursor-pointer shadow-map-item relative bg-white rounded-3xl rounded-bl-none bg-gradient-to-b from-background to-background-secondary-linear-second w-56 pt-[70px] overflow-hidden'
+                  >
                     <Image
                       src={`data:image/jpeg;base64,${marker.image}`}
                       width={224}
@@ -100,12 +171,15 @@ export const Map: FC<MapProps> = ({ markers }) => {
                           )
                         })}
                       </div>
-                      <div className='cursor-pointer'>
+                      <div
+                        onClick={handleLikeClick}
+                        className='cursor-pointer'
+                      >
                         <svg
                           width='40'
                           height='40'
                           viewBox='0 0 40 40'
-                          fill='none'
+                          fill={isLike ? '#422592' : 'none'}
                           xmlns='http://www.w3.org/2000/svg'
                         >
                           <path

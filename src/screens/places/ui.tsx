@@ -11,11 +11,14 @@ interface MarkerState {
     lat: number
     lng: number
   }
+  categories: string[]
+  dates: string[]
   name: string
   rating: number
   period: string
   description: string
   image: Blob
+  maxPeople: number
 }
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY
@@ -32,7 +35,7 @@ export const PlacesPage = () => {
       headers: { 'Content-Type': 'application/json' },
     })
     const result = await response.json()
-    console.log(result)
+
     return result.places
   }
 

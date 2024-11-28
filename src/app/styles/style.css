@@ -44,3 +44,28 @@
 .gm-style {
 	font: inherit !important;
 }
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 20px;
+	height: 20px;
+	border: 2px solid var(--text-secondary);
+	background: var(--background-primary-linear-first);
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+	filter: invert(14%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(96%) contrast(87%);
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+	filter: invert(14%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(96%) contrast(87%);
+}
