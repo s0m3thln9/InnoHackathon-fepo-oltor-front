@@ -3,6 +3,7 @@
 import { GoogleMap, InfoWindow, Marker } from '@react-google-maps/api'
 import { FC, useState } from 'react'
 import Image from 'next/image'
+import { Filters } from '@/shared/ui/filters/ui'
 
 interface MapProps {
   markers?: {
@@ -10,6 +11,8 @@ interface MapProps {
       lat: number
       lng: number
     }
+    categories: string[]
+    dates: Date[]
     name: string
     rating: number
     period: string
@@ -40,7 +43,8 @@ export const Map: FC<MapProps> = ({ markers }) => {
   }
 
   return (
-    <div className='w-full h-full'>
+    <div className='w-full h-full relative'>
+      <Filters />
       <GoogleMap
         center={{ lat: 52.4355, lng: 30.9554 }}
         zoom={13}

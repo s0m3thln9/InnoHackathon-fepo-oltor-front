@@ -11,6 +11,8 @@ interface MarkerState {
     lat: number
     lng: number
   }
+  categories: string[]
+  dates: Date[]
   name: string
   rating: number
   period: string
