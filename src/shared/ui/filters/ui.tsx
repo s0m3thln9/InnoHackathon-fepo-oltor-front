@@ -1,14 +1,17 @@
 import { Button } from '@/shared/ui/button'
 import { Input } from '@/shared/ui/input'
 import { Toddler } from '@/shared/ui/toddler'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { useAppDispatch } from '@/app/stores'
 import { filterSlice } from '@/entities/filter'
+import { cn } from '@/shared/libs'
 
 export const Filters = () => {
   const [dateFilter, setDateFilter] = useState<string | undefined>('')
   const [timeFilter, setTimeFilter] = useState<string | undefined>('')
   const [numberOfPeopleFilter, setNumberOfPeopleFilter] = useState(0)
+  const [isOpen, setIsOpen] = useState(false)
+  const divRef = useRef<HTMLDivElement>(null)
   const dispatch = useAppDispatch()
 
   const onChangePeople = (event: ChangeEvent<HTMLInputElement>) => {
@@ -21,6 +24,10 @@ export const Filters = () => {
 
   const onChangeTime = (event: ChangeEvent<HTMLInputElement>) => {
     setTimeFilter(event.target.value)
+  }
+
+  const onClick = () => {
+    setIsOpen(!isOpen)
   }
 
   const onSubmit = () => {
@@ -36,10 +43,36 @@ export const Filters = () => {
     )
   }
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (divRef.current && !divRef.current.contains(event.target as Node)) {
+        setIsOpen(false)
+      }
+    }
+
+    document.addEventListener('click', handleClickOutside)
+    return () => {
+      document.removeEventListener('click', handleClickOutside)
+    }
+  }, [])
+
   return (
-    <div className='absolute z-20 top-5 left-5 w-[340px]'>
-      <div className='h-24 rounded-t-[50px] flex justify-start items-center bg-background-secondary w-full pl-4'>
-        <div className='w-14 h-14 rounded-full flex justify-center items-center bg-background-primary-linear-first cursor-pointer'>
+    <div
+      ref={divRef}
+      className='absolute z-20 top-5 left-5 w-[340px] select-none'
+    >
+      <div
+        className={cn(
+          'h-24 flex items-center',
+          isOpen
+            ? 'rounded-t-[50px] w-full bg-background-secondary justify-start pl-5'
+            : 'rounded-[50px] w-24 bg-background justify-center',
+        )}
+      >
+        <div
+          onClick={onClick}
+          className='w-14 h-14 rounded-full flex justify-center items-center bg-background-primary-linear-first cursor-pointer'
+        >
           <svg
             width='32'
             height='32'
@@ -56,9 +89,21 @@ export const Filters = () => {
             />
           </svg>
         </div>
-        <div className='text-text-secondary text-2xl pl-5'>Filters</div>
+        <div
+          className={cn(
+            'text-text-secondary text-2xl pl-5',
+            isOpen ? '' : 'hidden',
+          )}
+        >
+          Filters
+        </div>
       </div>
-      <div className='w-full bg-background-primary-linear-second rounded-b-[50px] p-5 pt-8 flex flex-col items-center gap-10'>
+      <div
+        className={cn(
+          'w-full bg-background-primary-linear-second rounded-b-[50px] p-5 pt-8 flex flex-col items-center gap-10',
+          isOpen ? '' : 'hidden',
+        )}
+      >
         <Input
           label='select date'
           name='date'
