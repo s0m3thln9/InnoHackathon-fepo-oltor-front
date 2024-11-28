@@ -1,7 +1,7 @@
 'use client'
 
 import { GoogleMap, InfoWindow, Marker } from '@react-google-maps/api'
-import { FC, useState } from 'react'
+import { FC, useCallback, useRef, useState } from 'react'
 import Image from 'next/image'
 import { Filters } from '@/shared/ui/filters/ui'
 
@@ -35,6 +35,8 @@ const mapOptions = {
 
 export const Map: FC<MapProps> = ({ markers }) => {
   const [activeMarker, setActiveMarker] = useState<null | number>(null)
+  const mapRef = useRef<google.maps.Map | undefined>(undefined)
+
   const handleActiveMarker = (markerIndex: number | null) => {
     if (markerIndex === activeMarker) {
       return
@@ -42,14 +44,31 @@ export const Map: FC<MapProps> = ({ markers }) => {
     setActiveMarker(markerIndex)
   }
 
+  const onLoad = useCallback(function callback(map: google.maps.Map) {
+    mapRef.current = map
+    mapRef.current?.setCenter({ lat: 52.4355, lng: 30.9554 })
+  }, [])
+
+  const onUnmount = useCallback(function callback() {
+    mapRef.current = undefined
+  }, [])
+
+  const handleMapClick = useCallback(() => {
+    if (activeMarker !== null) {
+      setActiveMarker(null)
+    }
+  }, [activeMarker])
+
   return (
     <div className='w-full h-full relative'>
       <Filters />
       <GoogleMap
-        center={{ lat: 52.4355, lng: 30.9554 }}
         zoom={13}
         mapContainerClassName='w-full h-full'
         options={mapOptions}
+        onClick={handleMapClick}
+        onLoad={onLoad}
+        onUnmount={onUnmount}
       >
         {markers &&
           markers.map((marker, index) => (
@@ -66,6 +85,7 @@ export const Map: FC<MapProps> = ({ markers }) => {
                   options={{
                     headerDisabled: true,
                     pixelOffset: new window.google.maps.Size(120, 10),
+                    disableAutoPan: true,
                   }}
                 >
                   <div className='shadow-map-item relative bg-white rounded-3xl rounded-bl-none bg-gradient-to-b from-background to-background-secondary-linear-second w-56 pt-[70px] overflow-hidden'>
