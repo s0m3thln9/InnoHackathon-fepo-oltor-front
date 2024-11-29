@@ -72,15 +72,15 @@ export const TotalPage = () => {
             !place && 'w-full',
           )}
         >
-          <div className='self-start text-4xl font-medium text-text'>
+          <div className='self-start text-4xl font-medium text-text max-2xl:text-3xl'>
             Your choice:
           </div>
-          <div className='flex flex-col overflow-y-auto h-[70svh] mt-2'>
+          <div className='flex flex-col overflow-y-auto h-[65svh] mt-2'>
             {place ? (
               <div className='flex gap-2 flex-col items-start'>
                 <div className='text-text text-2xl'>Place:</div>
                 <div className='flex p-2 bg-gradient-to-l from-background to-background-secondary rounded-r-[20px]'>
-                  <div className='w-[174px] h-[174px] rounded-r-[20px] overflow-hidden'>
+                  <div className='w-[174px] h-[174px] rounded-r-[20px] overflow-hidden max-2xl:hidden'>
                     <Image
                       src={`data:image/jpeg;base64,${place.image}`}
                       width={174}
@@ -153,7 +153,7 @@ export const TotalPage = () => {
                 >
                   <div className='text-text text-2xl'>{person.category}:</div>
                   <div className='flex p-2 bg-gradient-to-l from-background to-background-secondary rounded-r-[20px]'>
-                    <div className='w-[174px] h-[174px] rounded-r-[20px] overflow-hidden'>
+                    <div className='w-[174px] h-[174px] rounded-r-[20px] overflow-hidden max-2xl:hidden'>
                       <Image
                         src={`data:image/jpeg;base64,${person.image}`}
                         width={174}
@@ -220,13 +220,13 @@ export const TotalPage = () => {
           </div>
           <Button
             onClick={handleReselect}
-            className='mt-5 py-6 px-20'
+            className='mt-5 py-6 px-20 max-2xl:px-12 max-2xl:py-5'
           >
             reselect people
           </Button>
         </div>
         {place && (
-          <div className='bg-background-primary-linear-first flex flex-col w-full items-center justify-start p-10 text-text-secondary text-xl gap-8'>
+          <div className='bg-background-primary-linear-first flex flex-col w-full items-center justify-center p-10 text-text-secondary text-xl gap-8'>
             <div className='text-4xl font-medium text-text-secondary'>
               Total:
             </div>
@@ -246,7 +246,7 @@ export const TotalPage = () => {
               <div>event duration</div>
               <div>2 hour</div>
             </div>
-            <div className='flex justify-between items-center w-full pt-40'>
+            <div className='flex justify-between items-center w-full pt-20'>
               <div>final price</div>
               <div>
                 {likedPeople?.reduce(
@@ -258,7 +258,7 @@ export const TotalPage = () => {
             </div>
             <div
               onClick={handleSend}
-              className='text-2xl font-medium pt-32 cursor-pointer'
+              className='text-2xl font-medium pt-4 cursor-pointer'
             >
               send your order
             </div>
