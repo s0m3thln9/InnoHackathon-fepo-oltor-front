@@ -33,11 +33,11 @@ export const PeopleSlider: FC<SliderProps> = ({
 
   useEffect(() => {
     setSlidesCount(() => {
-      if (window.innerWidth > 1150) {
+      if (window.innerWidth > 1400) {
         return 4
-      } else if (window.innerWidth > 800) {
+      } else if (window.innerWidth > 1100) {
         return 3
-      } else if (window.innerWidth > 520) {
+      } else if (window.innerWidth > 830) {
         return 2
       } else {
         return 1
@@ -45,11 +45,11 @@ export const PeopleSlider: FC<SliderProps> = ({
     })
     const handleResize = () => {
       setSlidesCount(() => {
-        if (window.innerWidth > 1150) {
+        if (window.innerWidth > 1400) {
           return 4
-        } else if (window.innerWidth > 800) {
+        } else if (window.innerWidth > 1100) {
           return 3
-        } else if (window.innerWidth > 520) {
+        } else if (window.innerWidth > 830) {
           return 2
         } else {
           return 1
@@ -74,16 +74,16 @@ export const PeopleSlider: FC<SliderProps> = ({
             <div className='self-start h-[48px]'>
               {slide.category + ' ' + slide.name}
             </div>
-            <div className='text-sm h-[100px] truncate text-wrap'>
+            <div className='text-sm h-[43px] truncate text-wrap'>
               {slide.description}
             </div>
             <div className='text-xl'>{slide.price}$</div>
             <div className='text-xl'>1 hour</div>
-            <div className='w-[174px] h-[123px] rounded-[30px] overflow-hidden'>
+            <div className='w-[170px] h-[120px] rounded-[30px] overflow-hidden'>
               <Image
                 src={`data:image/jpeg;base64,${slide.image}`}
-                width={174}
-                height={123}
+                width={170}
+                height={120}
                 alt={slide.name}
                 className='w-full h-full object-cover'
               />
