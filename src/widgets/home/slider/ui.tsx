@@ -17,7 +17,7 @@ interface SliderProps {
   slides: Slide[]
 }
 
-export const Slider: FC<SliderProps> = ({ className, slides }) => {
+export const HomeSlider: FC<SliderProps> = ({ className, slides }) => {
   const [slidesCount, setSlidesCount] = useState(4)
 
   useEffect(() => {

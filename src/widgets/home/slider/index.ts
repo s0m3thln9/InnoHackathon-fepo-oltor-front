@@ -1,2 +1,2 @@
-export { Slider } from './ui'
+export { HomeSlider } from './ui'
 export type { Slide } from './ui'
