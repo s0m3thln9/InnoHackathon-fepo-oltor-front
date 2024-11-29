@@ -18,11 +18,7 @@ interface SliderProps {
   handleClickAction: (text: string) => void
 }
 
-export const Slider: FC<SliderProps> = ({
-  className,
-  slides,
-  handleClickAction,
-}) => {
+export const HomeSlider: FC<SliderProps> = ({ className, slides, handleClickAction, }) => {
   const [slidesCount, setSlidesCount] = useState(4)
 
   useEffect(() => {

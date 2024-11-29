@@ -1,7 +1,7 @@
 'use client'
 
 import { Header } from '@/shared/ui/header'
-import { Slide, Slider } from '@/widgets/home/slider'
+import { Slide, HomeSlider } from '@/widgets/home/slider'
 import image1 from '../../../public/images/wedding_foto.png'
 import image2 from '../../../public/images/bd_cake.png'
 import image3 from '../../../public/images/corporativ_foto.png'
@@ -49,7 +49,7 @@ export const EventsPage = () => {
         <p className='text-2xl text-text-secondary mt-5 max-2xl:text-xl max-sm:text-lgl'>
           First, select the upcoming event
         </p>
-        <Slider
+        <HomeSlider
           handleClickAction={handleClickAction}
           slides={slides}
           className='mt-24 max-lg:mt-8'
