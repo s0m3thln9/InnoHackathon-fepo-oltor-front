@@ -41,6 +41,8 @@ export const Filters = () => {
         numberOfPeople,
       }),
     )
+    sessionStorage.setItem('date', date ? date : '')
+    sessionStorage.setItem('numberOfPeople', numberOfPeople.toString())
   }
 
   useEffect(() => {
@@ -134,7 +136,7 @@ export const Filters = () => {
           onClick={onSubmit}
           className='bg-background-secondary px-16'
         >
-          Apply
+          apply
         </Button>
       </div>
     </div>

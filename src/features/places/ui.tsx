@@ -14,7 +14,7 @@ import { Filters } from '@/shared/ui/filters/ui'
 import { useAppSelector } from '@/app/stores'
 import { useRouter } from 'next/navigation'
 
-interface CustomMarker {
+export interface CustomMarker {
   coordinates: {
     lat: number
     lng: number

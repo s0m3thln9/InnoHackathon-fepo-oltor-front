@@ -1,0 +1,1 @@
+export { TotalPage } from './ui'

@@ -8,7 +8,7 @@ import { PeopleSlider } from '@/widgets/people/slider'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-interface Person {
+export interface Person {
   name: string
   description: string
   price: number
@@ -24,7 +24,6 @@ export const PeoplePage = () => {
   const router = useRouter()
 
   const place = JSON.parse(sessionStorage.getItem('place') as string)
-  console.log(place)
 
   const loadPeople = async () => {
     const response = await fetch('http://localhost:4000/people', {
@@ -176,7 +175,7 @@ export const PeoplePage = () => {
           Do you want to hire staff?
         </div>
         <div className='relative bg-background-secondary flex flex-col items-center justify-between w-full flex-grow'>
-          <div className='absolute top-0 right-0 w-4/5 max-2xl:w-[75%] max-xl:w-2/3 max-lg:w-1/2 max-md:w-[60%] max-sm:w-[65%]'>
+          <div className='absolute top-0 right-0 w-4/5 max-2xl:w-[75%] max-xl:w-2/3 max-lg:w-1/2 max-md:w-[60%] max-sm:w-[65%] select-none cursor-pointer'>
             {slides.length > 0 ? (
               <PeopleSlider
                 likedPeople={likedPeople}
