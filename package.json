@@ -1,5 +1,6 @@
 {
   "name": "innohackathon-fepo-oltor-front",
+  "proxy": "https://inno-hackathon-fepo-oltor-back-qayx3hkq2.vercel.app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
