@@ -1,3 +1,10 @@
-import { TotalPage } from '@/screens/total'
+'use client'
 
-export default TotalPage
+import dynamic from 'next/dynamic'
+
+const DynamicPage = dynamic(
+  () => import('@/screens/total').then((mod) => mod.TotalPage),
+  { ssr: false },
+)
+
+export default DynamicPage

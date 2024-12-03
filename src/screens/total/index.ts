@@ -1,1 +1,1 @@
-export { TotalPage } from './ui'
+export { default as TotalPage } from './ui'

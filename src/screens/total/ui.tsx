@@ -11,7 +11,7 @@ import { cn } from '@/shared/libs'
 import { CustomMarker } from '@/features/places'
 import { Notification } from '@/shared/ui/notification'
 
-export const TotalPage = () => {
+const TotalPage = () => {
   const router = useRouter()
   const { user, isUserLoaded } = useLoadUser()
   const [likedPeople, setLikedPeople] = useState<Person[]>()
@@ -268,3 +268,5 @@ export const TotalPage = () => {
     </>
   )
 }
+
+export default TotalPage
