@@ -66,11 +66,14 @@ export const RegistrationForm: FC = () => {
   }
 
   const handleSubmit = async (values: RegistrationFormValues) => {
-    const response = await fetch('http://localhost:4000/registration', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(values),
-    })
+    const response = await fetch(
+      'https://inno-hackathon-fepo-oltor-back-qayx3hkq2.vercel.app/api/registration',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values),
+      },
+    )
     const result: RegistrationResult = await response.json()
     if (result.status) {
       router.replace('/login')

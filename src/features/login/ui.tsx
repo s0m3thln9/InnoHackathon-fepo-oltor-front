@@ -55,11 +55,14 @@ export const LoginForm: FC = () => {
   }
 
   const handleSubmit = async (values: LoginFormValues) => {
-    const response = await fetch('http://localhost:4000/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(values),
-    })
+    const response = await fetch(
+      'https://inno-hackathon-fepo-oltor-back-qayx3hkq2.vercel.app/api/login',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values),
+      },
+    )
     const result: LoginResult = await response.json()
     if (result.status) {
       if (result.user) {

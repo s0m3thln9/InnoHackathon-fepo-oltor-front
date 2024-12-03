@@ -30,10 +30,13 @@ export const PlacesPage = () => {
   const { user, isUserLoaded } = useLoadUser()
 
   const loadMarkers = async () => {
-    const response = await fetch('http://localhost:4000/places', {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-    })
+    const response = await fetch(
+      'https://inno-hackathon-fepo-oltor-back-qayx3hkq2.vercel.app/api/places',
+      {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      },
+    )
     const result = await response.json()
 
     return result.places

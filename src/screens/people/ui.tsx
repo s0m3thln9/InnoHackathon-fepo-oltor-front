@@ -26,10 +26,13 @@ export const PeoplePage = () => {
   const place = JSON.parse(sessionStorage.getItem('place') as string)
 
   const loadPeople = async () => {
-    const response = await fetch('http://localhost:4000/people', {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-    })
+    const response = await fetch(
+      'https://inno-hackathon-fepo-oltor-back-qayx3hkq2.vercel.app/api/people',
+      {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      },
+    )
     const result = await response.json()
     console.log(result)
 
