@@ -31,7 +31,7 @@ export const PlacesPage = () => {
 
   const loadMarkers = async () => {
     const response = await fetch(
-      'https://inno-hackathon-fepo-oltor-back-qayx3hkq2.vercel.app/api/places',
+      'https://inno-hackathon-fepo-oltor-back.vercel.app/api/places',
       {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },

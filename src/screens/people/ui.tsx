@@ -27,7 +27,7 @@ export const PeoplePage = () => {
 
   const loadPeople = async () => {
     const response = await fetch(
-      'https://inno-hackathon-fepo-oltor-back-qayx3hkq2.vercel.app/api/people',
+      'https://inno-hackathon-fepo-oltor-back.vercel.app/api/people',
       {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
