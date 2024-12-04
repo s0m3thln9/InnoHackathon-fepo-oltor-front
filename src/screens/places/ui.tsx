@@ -37,7 +37,10 @@ export const PlacesPage = () => {
         headers: { 'Content-Type': 'application/json' },
       },
     )
-    return await response.json()
+    const result = await response.json()
+    console.log(result)
+
+    return result.places
   }
 
   useEffect(() => {
