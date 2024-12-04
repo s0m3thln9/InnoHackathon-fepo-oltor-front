@@ -38,6 +38,7 @@ export const PlacesPage = () => {
       },
     )
     const result = await response.json()
+    console.log(result.places)
 
     return result.places
   }
