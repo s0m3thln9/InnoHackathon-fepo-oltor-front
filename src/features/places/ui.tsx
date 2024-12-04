@@ -91,8 +91,9 @@ export const Map: FC<MapProps> = ({ markers }) => {
   useEffect(() => {
     const filtered = markers?.filter((marker) => {
       const categoryMatch =
-        category === undefined || marker.categories.includes(category as string)
-      const dateMatch = date === undefined || marker.dates.includes(date)
+        category === undefined ||
+        marker.categories?.includes(category as string)
+      const dateMatch = date === undefined || marker.dates?.includes(date)
       const [startTime, endTime] = marker.period.split('-')
       const timeMatch =
         time === undefined || (time >= startTime && time <= endTime)
