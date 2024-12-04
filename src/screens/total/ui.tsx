@@ -60,7 +60,7 @@ const TotalPage = () => {
     <>
       {notification && (
         <Notification
-          message='Заказ успешно отправлен'
+          message='Order sent successfully'
           onClose={() => setNotification(false)}
         />
       )}
