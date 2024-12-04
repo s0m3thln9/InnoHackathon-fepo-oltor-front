@@ -19,7 +19,7 @@ export interface CustomMarker {
     lat: number
     lng: number
   }
-  categories: string[]
+  category: string[]
   dates: string[]
   name: string
   rating: number
@@ -89,13 +89,9 @@ export const Map: FC<MapProps> = ({ markers }) => {
   }
 
   useEffect(() => {
-    console.log(markers)
     const filtered = markers?.filter((marker) => {
-      console.log(category)
-      console.log(marker.categories)
       const categoryMatch =
-        category === undefined ||
-        marker.categories?.includes(category as string)
+        category === undefined || marker.category?.includes(category as string)
       const dateMatch = date === undefined || marker.dates?.includes(date)
       const [startTime, endTime] = marker.period.split('-')
       const timeMatch =
