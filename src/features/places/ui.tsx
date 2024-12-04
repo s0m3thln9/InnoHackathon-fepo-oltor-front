@@ -89,7 +89,10 @@ export const Map: FC<MapProps> = ({ markers }) => {
   }
 
   useEffect(() => {
+    console.log(markers)
     const filtered = markers?.filter((marker) => {
+      console.log(category)
+      console.log(marker.categories)
       const categoryMatch =
         category === undefined ||
         marker.categories?.includes(category as string)
