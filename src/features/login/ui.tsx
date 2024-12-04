@@ -58,7 +58,6 @@ export const LoginForm: FC = () => {
     const response = await fetch(
       'https://inno-hackathon-fepo-oltor-back-qayx3hkq2.vercel.app/api/login',
       {
-        mode: 'no-cors',
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values),
