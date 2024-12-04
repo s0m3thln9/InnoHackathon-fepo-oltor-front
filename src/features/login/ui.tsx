@@ -56,7 +56,7 @@ export const LoginForm: FC = () => {
 
   const handleSubmit = async (values: LoginFormValues) => {
     const response = await fetch(
-      'https://inno-hackathon-fepo-oltor-back-5fgawh1zg.vercel.app/api/login',
+      'https://inno-hackathon-fepo-oltor-back.vercel.app/api/login',
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
