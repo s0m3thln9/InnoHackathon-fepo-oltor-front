@@ -101,7 +101,6 @@ export const Map: FC<MapProps> = ({ markers }) => {
 
       return categoryMatch && dateMatch && timeMatch && peopleMatch
     })
-
     setFilteredMarkers(filtered)
   }, [category, date, markers, numberOfPeople, time])
 
