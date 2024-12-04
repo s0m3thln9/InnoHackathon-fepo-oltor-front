@@ -7,10 +7,8 @@ import { Libraries, useJsApiLoader } from '@react-google-maps/api'
 import { useLoadUser } from '@/shared/hooks'
 
 interface MarkerState {
-  coordinates: {
-    lat: number
-    lng: number
-  }
+  lat: number
+  lng: number
   category: string[]
   dates: string[]
   name: string

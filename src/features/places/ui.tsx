@@ -15,10 +15,8 @@ import { useAppSelector } from '@/app/stores'
 import { useRouter } from 'next/navigation'
 
 export interface CustomMarker {
-  coordinates: {
-    lat: number
-    lng: number
-  }
+  lat: number
+  lng: number
   category: string[]
   dates: string[]
   name: string
@@ -120,8 +118,8 @@ export const Map: FC<MapProps> = ({ markers }) => {
             <Marker
               key={index}
               position={{
-                lat: marker.coordinates.lat,
-                lng: marker.coordinates.lng,
+                lat: marker.lat,
+                lng: marker.lng,
               }}
               onClick={() => handleActiveMarker(index)}
             >
